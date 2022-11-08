@@ -7,14 +7,14 @@ User First Name, Last Name, ID and Comments are stored on a persistent database.
 
 Built With---
 
-Cucumber
-Selenium
-TestNG
-Java/Javalin
-Postman
-HTML/CSS/Javascript
-PostGres
-Google Cloud Platform
+Cucumber,
+Selenium,
+TestNG,
+Java/Javalin,
+Postman,
+HTML/CSS/Javascript,
+PostGres,
+Google Cloud Platform,
 
 Getting Started
 
