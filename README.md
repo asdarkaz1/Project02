@@ -14,20 +14,26 @@ HTML/CSS/Javascript,
 PostGres,
 Google Cloud Platform.
 
-Getting Started
+Getting Started----
+
 
 Prerequisites
+npm install maven----
 
-Installation
+Installation---
+1.Get a free API Key
+2. Clone the repo
+3. Install NPM packages
+4. Enter your API in config.js
 
-Usage
+Usage---This project can be used as a small intranet feed to help your organization build relationships through common interests. 
 
 Roadmap
 
 Contributing
 
-License
+License---Distributed under MIT License. 
  
-Contact
+Contact----anwar905@revature.net, jonathan756@revature.net, brithnie075@revature.net, dwyan279@revature.net
 
-Acknowledgements
+Acknowledgements---Jasdhir Singh, Revature Corporation.
