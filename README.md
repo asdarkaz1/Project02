@@ -5,7 +5,7 @@ User First Name, Last Name, ID and Comments are stored on a persistent database.
 
 ---Testing---- Our team implemented TDD. The RTM, Test Plan Document, Test Case Design Report and Defect Report are attached in this repository. We used Cucumber and Gherkin to write 5 feature files then implemented the steps via testNG. Our team used Selenium to automate the webrowser and perfrom e2e testing. API endpoint testing was done using Postman. Database testing was done using Mockito.
 
-Built With
+Built With---
 
 Cucumber
 Selenium
