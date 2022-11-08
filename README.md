@@ -14,7 +14,7 @@ Java/Javalin,
 Postman,
 HTML/CSS/Javascript,
 PostGres,
-Google Cloud Platform,
+Google Cloud Platform.
 
 Getting Started
 
