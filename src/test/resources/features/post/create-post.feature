@@ -66,11 +66,10 @@ Feature: Create Post
     Then The post form appear
     When The user types No Post Title into the input with
     """
+    This Post Will Have No Description or Image
     """
     When The user types a Post Description into the input with
     """
-    1. A spoken or written representation or account of a person, object, or event.
-    2. The action of giving a spoken or written representation or account.
     """
     When The user presses on the Post button
     Then An Alert says "You Must Have a Post Body"
