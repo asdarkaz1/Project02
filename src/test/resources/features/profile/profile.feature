@@ -1,3 +1,4 @@
+@profile
 Feature: Profile
 
   Scenario: New User Creates Profile
