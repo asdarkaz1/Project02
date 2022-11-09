@@ -1,4 +1,4 @@
-@profile
+
 Feature: Profile
 
   Scenario: New User Creates Profile
@@ -11,6 +11,7 @@ Feature: Profile
     When  The user presses "submit".
     Then  The user will be navigated to the home page.
 
+  @profile
   Scenario: Registered User Updates Profile
     Given The user is on the homepage.
     When  The user clicks login and types in their credentials.
