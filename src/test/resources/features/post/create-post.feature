@@ -8,7 +8,7 @@ Feature: Create Post
     """
     How To Generate Smart Blog Post Ideas
     """
-    When The user types a Post Description into the input with
+    When The user types a Post Description into the input field with
     """
     1. Have a writing schedule.
     2. Have a goal, thus targets.
@@ -30,9 +30,9 @@ Feature: Create Post
     Given The user is on the Dashboard
     When The user clicks on the Create New Post button
     Then The post form appear
-    When The user types a Post Title into the input with
+    When The user types a Post Title into the input field with
     """
-    This Has tTo Be The Picture Of The Day
+    This Has To Be The Picture Of The Day
     """
     When The user the Plus (+) icon
     Then The user picture folder from user desktop is pulled
@@ -49,10 +49,8 @@ Feature: Create Post
     Given The user is on the Dashboard
     When The user clicks on the Create New Post button
     Then The post form appear
-    When The user types No Post Title into the input with
-    """
-    """
-    When The user types a Post Description into the input with
+    When The user types No Post Title into the input field
+    When The user types a Post Description into the input field with
     """
     1. A spoken or written representation or account of a person, object, or event.
     2. The action of giving a spoken or written representation or account.
@@ -64,12 +62,10 @@ Feature: Create Post
     Given The user is on the Dashboard
     When The user clicks on the Create New Post button
     Then The post form appear
-    When The user types No Post Title into the input with
+    When The user types No Post Title into the input field with
     """
     This Post Will Have No Description or Image
     """
-    When The user types a Post Description into the input with
-    """
-    """
+    When The user types No Post Description into the input field nor upload an Image
     When The user presses on the Post button
     Then An Alert says "You Must Have a Post Body"
