@@ -15,7 +15,7 @@ Feature: Update Post
   Scenario:  Cancel Post Update
     Given The user is on the Dashboard
     When The user clicks on the update icon (pen image)
-    Then The user is directed to the "Post Page"
+    Then The user is directed to the "Update Post Page"
     When The user types in or remove from the Post Title text field
     When The user types in or remove from the Post Body field
     When The user presses on the Cancel button
