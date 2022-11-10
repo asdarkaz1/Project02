@@ -11,6 +11,9 @@ public class PostController implements Controller {
         private PostService postService = new PostService();
 
         public void mapEndPoints(Javalin app) {
+
+            app.post("", (ctx) -> {});
+            app.get("", (ctx) -> {});
             app.get("/users/{user_id}/posts", (ctx) ->{
                 String userId = ctx.pathParam("user_id");
 
@@ -25,6 +28,7 @@ public class PostController implements Controller {
                     ctx.status(400);
                 }
             });
+            app.get("", (ctx) -> {});
 
         }
 }
