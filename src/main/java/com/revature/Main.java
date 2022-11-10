@@ -22,18 +22,18 @@ public class Main {
     public static void main(String[] args) {
         Javalin app = Javalin.create();
 
-        // Controller is an interface that is implemented
-        // by UserController + BankAccountController
-        // The Controller interface defines a method,
-        // public abstract void mapEndpoints(Javalin app)
+        //actually mapping the endpoints for comment controller
 
-        //We are supporting two resources in our  banking API, so we had two Controllers?
-        Controller[] controllers = { new CommentController(), new PostController() };
+        //actually mapping the endpoints for post controller
 
-        for (Controller c : controllers) {
-            c.mapEndpoints(app);
+        //Controller is an interface that is implemented by these controllers.
+        Controller[] controllers ={
+                new CommentController(), new PostController()
+        };
+
+        for(Controller c : controllers){
+            c.mapEndPoints(app);
         }
-
         app.start(8080);
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CommentController implements Controller{
 
-    //Map your endpoints separate your resources based on different endpoint mappings.
+    //Mapping endpoints for commenting
     private CommentDao commentDao = new CommentDao();
     public void mapEndPoints(Javalin app){
 
@@ -20,7 +20,6 @@ public class CommentController implements Controller{
 
 
         });
-
 
     }
 
