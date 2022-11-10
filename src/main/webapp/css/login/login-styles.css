@@ -1,5 +1,5 @@
 
-.bg{background: url("../login-background-photo.jpg") no-repeat; width: 100%; height: 100vh; background-attachment:fixed;
+.bg{background: url("login-images/login-background-photo.jpg") no-repeat; width: 100%; height: 100vh; background-attachment:fixed;
     background-position:center center; background-size: cover; background-color: #464646;}
 
 .form-container{border: 1px solid #fff; padding:50px 60px; margin-top:30vh;
