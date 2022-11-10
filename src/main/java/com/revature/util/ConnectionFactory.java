@@ -1,4 +1,4 @@
-package com.revature.dao;
+package com.revature.util;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -9,7 +9,7 @@ public class ConnectionFactory {
 
 
 
-    public static Connection ConnectionFactory() throws SQLException {
+    public static Connection createConnection() throws SQLException {
 
         //Database credentials should not be hard coded use system environment variables. 20:53 (restart application after)
    String url = System.getenv("");

@@ -1,26 +1,30 @@
 package com.revature.controller;
 
-import com.revature.dao.CommentDao;
+import com.revature.model.Post;
+import com.revature.service.PostService;
 import io.javalin.Javalin;
+
+import java.util.List;
 
 public class PostController implements Controller {
 
-    //Mapping endpoints for posting.
-    private PostController postDao = new PostController();
-    public void mapEndPoints(Javalin app){
+        private PostService postService = new PostService();
 
-        app.post("/post", (ctx) -> {
+        public void mapEndPoints(Javalin app) {
+            app.get("/users/{user_id}/posts", (ctx) ->{
+                String userId = ctx.pathParam("user_id");
 
-        });
+                try {
+                    int uId = Integer.parseInt(userId);
+                    List<Post> posts = postService.getAllPostsBelongingToUser(uId);
+                    ctx.json(posts);
+                    ctx.status(200);
 
-        app.get("/post", (ctx) -> {
+                } catch (NumberFormatException e) {
+                    ctx.result("Id "+userId+" must be a valid int!");
+                    ctx.status(400);
+                }
+            });
 
-
-        });
-
-
-    }
-
-
-
+        }
 }

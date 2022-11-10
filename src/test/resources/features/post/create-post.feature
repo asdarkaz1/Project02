@@ -57,6 +57,7 @@ Feature: Create Post
     """
     When The user presses on the Post button
     Then An Alert says "You Must Have a Post Title"
+    Then The Post was not created
 
   Scenario: No Post Body
     Given The user is on the Dashboard
@@ -68,4 +69,5 @@ Feature: Create Post
     """
     When The user types No Post Description into the input field nor upload an Image
     When The user presses on the Post button
-    Then An Alert says "You Must Have a Post Body"
+    Then An Alert says "You Must Have a Post Description"
+    Then The Post was not created

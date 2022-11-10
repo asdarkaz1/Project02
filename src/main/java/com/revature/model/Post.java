@@ -8,18 +8,25 @@ public class Post {
     private int id;
     private String postTitle;
     private String postDescription;
-    private Image postBodyImage;
+    private Image postImage;
     private int userId;
 
     public Post(){}
     public Post(int id){
         this.id = id;
     }
-    public Post(int id, String postTitle, String postDescription, Image postBodyImage, int userId) {
+    public Post(int id, String postTitle, String postDescription, Image postImage) {
         this.id = id;
         this.postTitle = postTitle;
         this.postDescription = postDescription;
-        this.postBodyImage = postBodyImage;
+        this.postImage = postImage;
+        this.userId = userId;
+    }
+    public Post(int id, String postTitle, String postDescription, Image postImage, int userId) {
+        this.id = id;
+        this.postTitle = postTitle;
+        this.postDescription = postDescription;
+        this.postImage = postImage;
         this.userId = userId;
     }
 
@@ -47,12 +54,12 @@ public class Post {
         this.postDescription = postDescription;
     }
 
-    public Image getPostBodyImage() {
-        return postBodyImage;
+    public Image getPostImage() {
+        return postImage;
     }
 
-    public void setPostBodyImage(Image postBodyImage) {
-        this.postBodyImage = postBodyImage;
+    public void setPostImage(Image postImage) {
+        this.postImage = postImage;
     }
 
     public int getUserId() {
@@ -68,12 +75,12 @@ public class Post {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
-        return id == post.id && userId == post.userId && postTitle.equals(post.postTitle) && postDescription.equals(post.postDescription) && Objects.equals(postBodyImage, post.postBodyImage);
+        return id == post.id && userId == post.userId && postTitle.equals(post.postTitle) && postDescription.equals(post.postDescription) && Objects.equals(postImage, post.postImage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, postTitle, postDescription, postBodyImage, userId);
+        return Objects.hash(id, postTitle, postDescription, postImage, userId);
     }
 
     @Override
@@ -82,7 +89,7 @@ public class Post {
                 "id=" + id +
                 ", postTitle='" + postTitle + '\'' +
                 ", postDescription='" + postDescription + '\'' +
-                ", postBodyImage=" + postBodyImage +
+                ", postImage=" + postImage +
                 ", userId=" + userId +
                 '}';
     }
