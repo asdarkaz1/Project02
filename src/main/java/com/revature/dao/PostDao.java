@@ -50,7 +50,7 @@ public class PostDao {
                 BufferedImage postImage = ImageIO.read(is);
 
                 return new Post(rs.getInt("id"), rs.getString("postTitle"),
-                        rs.getString("postDescription"), postImage, rs.getInt("user_id"));
+                        rs.getString("postDescription"), postImage, rs.getInt("user_id"), rs.getInt("postLike"));
             } else {
                 //if no record associated with the id is found
                 return null;
@@ -73,7 +73,7 @@ public class PostDao {
                 BufferedImage postImage = ImageIO.read(is);
 
                 Post post = new Post(rs.getInt("id"), rs.getString("postTitle"),
-                        rs.getString("postDescription"), postImage, rs.getInt("user_id"));
+                        rs.getString("postDescription"), postImage, rs.getInt("user_id"), rs.getInt("postLike"));
 
                 userPosts.add(post);
             }
@@ -96,7 +96,7 @@ public class PostDao {
                 BufferedImage postImage = ImageIO.read(is);
 
                 Post post = new Post(rs.getInt("id"), rs.getString("postTitle"),
-                        rs.getString("postDescription"), postImage);
+                        rs.getString("postDescription"), postImage, rs.getInt("user_id"), rs.getInt("postLike"));
 
                 posts.add(post);
             }
