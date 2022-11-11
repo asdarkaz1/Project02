@@ -11,7 +11,7 @@
   <body>
     <div>
         <h1 style="text-align:center"> Profile</h1>
-        <form style="text-align: center" action ="" method="POST">
+        <form style="text-align: center" action ="http://127.0.01:8080/profile" method="POST">
           <label for="myImage"> Update your profile picture? </label><br>
           <br>
           <input type="file" id="myImage" name="Imagename"><br>
@@ -36,7 +36,7 @@
         <label for="Music">Music</label><br>
         <input type="checkbox" id="Travel" name="Travel" value="Travel">
         <label for="Travel">Travel</label><br>
-        <button onclick="revealMessage(); return false;">Update </button>
+        <button type="submit">Update </button>
         <button type ="reset">Reset </button>
         
       </form>
