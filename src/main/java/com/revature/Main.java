@@ -2,7 +2,6 @@ package com.revature;
 import com.revature.controller.PostController;
 import com.revature.controller.Controller;
 import io.javalin.Javalin;
-<<<<<<< HEAD
 import org.eclipse.jetty.server.Authentication;
 import org.postgresql.Driver;
 
@@ -12,8 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> 86b84a04affcfa0dcf43f68310a955c65b7c82a3
+
 
 public class Main {
 
@@ -37,7 +35,7 @@ public class Main {
             List<Profile> allProfiles = new ArrayList<>();
         });
 
-<<<<<<< HEAD
+
 
 //Endpoint 2
 app.post("/profile",(ctx) -> {
@@ -68,7 +66,7 @@ app.post("/profile",(ctx) -> {
 
 
 });
-=======
+
         //Controller is an interface that is implemented by these controllers.
         Controller[] controllers ={new PostController() };
 
@@ -76,7 +74,6 @@ app.post("/profile",(ctx) -> {
             c.mapEndPoints(app);
         }
 
->>>>>>> 86b84a04affcfa0dcf43f68310a955c65b7c82a3
         app.start(8080);
     }
 
