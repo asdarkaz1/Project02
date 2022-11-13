@@ -13,7 +13,7 @@ public class PostService {
     private PostDao postDao = new PostDao();
 
     public void createPost(Post post) throws SQLException {
-        post.setPostTitle(post.getPostTitle().strip());
+       post.setPostTitle(post.getPostTitle().strip());
         post.setPostDescription(post.getPostDescription().strip());
         post.setPostImage(post.getPostImage());
 

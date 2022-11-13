@@ -1,80 +1,105 @@
 package com.revature;
-import com.revature.controller.PostController;
-import com.revature.controller.Controller;
+import com.revature.ProfileModel.User;
+import com.revature.util.ConnectionFactory;
 import io.javalin.Javalin;
-import org.eclipse.jetty.server.Authentication;
 import org.postgresql.Driver;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Main {
 
     public static void main(String[] args) {
 
-        //create Javalin object and return it
-        Javalin app = Javalin.create();
+        //configuring cors policy so that we are able to access the endpoints from another machine.
+        //Cross Origin resource sharing. Two different origins 8080 vs. 5500 on the browser.
+        //need to use HTTP to go around CORS policy
+        Javalin app = Javalin.create( config -> { config.plugins.enableCors((cors) -> cors.add(it -> {
+                    it.defaultScheme = "http";
+                    it.allowHost("127.0.0.1:5500");
+                    it.allowCredentials = true;
+                }
+        ));});
 
 
-        //Endpoint1 (Delete this endpoint);
-        app.get("/profile", (ctx) -> {
-            //1.Write the JDBC that will go and query the database for all users.
-            String url = "jdbc:postgresql://34.134.127.27:5432/postgres";
+
+
+        //READ ENDPOINT.
+        app.post("/profileview", (ctx) -> {
+            System.out.println("Queried");
+            String url = "jdbc:postgresql://34.134.248.69:5432/postgres";
             String username = "postgres";
-            String password = "revstarProject02";
+            String password = "password";
             Driver postgresDriver = new Driver();
             DriverManager.registerDriver(postgresDriver);
-            Connection connection = DriverManager.getConnection(url,username, password);
-            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Profile");
-            ResultSet rs = pstmt.executeQuery();
-            List<Profile> allProfiles = new ArrayList<>();
+            Connection connection = DriverManager.getConnection(url, username, password);
+                User u = ctx.bodyAsClass(User.class);
+                PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM users WHERE password = ?");
+                pstmt.setString(1, u.getPassWord());
+                ResultSet rs = pstmt.executeQuery();
+               if(rs.next()) {
+                    String firstName = rs.getString("firstname");
+                    String lastName = rs.getString("lastname");
+                    String userName = rs.getString("username");
+                    String passWord = rs.getString("password");
+                    String email = rs.getString("email");
+                    String interest = rs.getString("interest");
+                    ctx.json(new User(firstName, lastName, userName, passWord, email, interest));
+                    ctx.status(200);
+                }else {
+                   ctx.status(400);
+                   ctx.result("Sorry, not found in our database.");
+               }
+
         });
 
 
+        //UPDATE ENDPOINT.
+        app.post("/profileupdate",(ctx) -> {
+        System.out.println("Updated");
+            String url = "jdbc:postgresql://34.134.248.69:5432/postgres";
+            String username = "postgres";
+            String password = "password";
+            Driver postgresDriver = new Driver();
+            DriverManager.registerDriver(postgresDriver);
+            Connection connection = DriverManager.getConnection(url, username, password);
+            User u = ctx.bodyAsClass(User.class);
+           PreparedStatement pstmt = connection.prepareStatement(
+                   "Update users set username = ? , email = ? ,interest = ? ,firstname= ? , lastname= ? where password = ?;");
+           pstmt.setString(1,u.getUsername());
+           pstmt.setString(2, u.getEmail());
+           pstmt.setString(3, u.getInterest());
+           pstmt.setString(4, u.getFirstname());
+           pstmt.setString(5, u.getLastname());
+           pstmt.setString(6, u.getPassWord());
 
-//Endpoint 2
-app.post("/profile",(ctx) -> {
-    System.out.println("Connected");
-    String user_name = ctx.pathParam("username2");
-    String email;
-    String pass_word;
-    String interest;
-    String firstname;
-    String lastname;
-    String url = "jdbc:postgresql://34.134.127.27:5432/postgres";
-    String username = "postgres";
-    String password = "revstarProject02";
-    Driver postgresDriver = new Driver();
-    DriverManager.registerDriver(postgresDriver);
-    Connection connection = DriverManager.getConnection(url,username, password);
-    //Passing information to the query  //4:35
-    PreparedStatement pstmt = connection.prepareStatement("INSERT INTO " +
-            "users (username, email, password, interest, firstname, lastname) " +
-            "VALUES (? ,?, ?, ?, ?, ?)");
-    pstmt.setString(1,user_name);
+           int numberOfRecordsUpdated = pstmt.executeUpdate();
+            ctx.result(numberOfRecordsUpdated + " record(s) updated");
 
-    pstmt.executeQuery();
+        });
 
-    //Take JSON information and create a profile object.
+//DELETE ENDPOINT
+        app.post("/profiledelete", (ctx) -> {
+            System.out.println("Deleted");
+            String url = "jdbc:postgresql://34.134.248.69:5432/postgres";
+            String username = "postgres";
+            String password = "password";
+            Driver postgresDriver = new Driver();
+            DriverManager.registerDriver(postgresDriver);
+            Connection connection = DriverManager.getConnection(url, username, password);
+            User u = ctx.bodyAsClass(User.class);
+            PreparedStatement pstmt = connection.prepareStatement("DELETE from users where password= ?;");
+                pstmt.setString(1,u.getPassWord());
+                int recordsUpdated = pstmt.executeUpdate();
+                ctx.result(recordsUpdated + " record(s) deleted.");
 
-
-
-
-});
-
-        //Controller is an interface that is implemented by these controllers.
-        Controller[] controllers ={new PostController() };
-
-        for(Controller c : controllers){
-            c.mapEndPoints(app);
-        }
-
+        });
         app.start(8080);
-    }
 
+
+
+    }
 }
