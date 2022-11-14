@@ -2,18 +2,18 @@ package com.revature.dto;
 
 import java.util.Objects;
 
-public class Message {
+public class UserMessage {
 
     private String message;
 
-    public Message() {
+    public UserMessage() {
     }
 
     public String getMessage() {
         return message;
     }
 
-    public Message(String message){
+    public UserMessage(String message){
         this.message = message;
     }
 
@@ -24,7 +24,7 @@ public class Message {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Message message1)) return false;
+        if (!(o instanceof UserMessage message1)) return false;
         return Objects.equals(message, message1.message);
     }
 

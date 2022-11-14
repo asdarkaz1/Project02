@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class UserDAO {
 
     public User findUserByUsernameEmailAndPassword(String username, String email, String password) throws SQLException {
-        try (Connection connection = ConnectionUtility.getConnection()) {
+        try (Connection connection = UserConnectionUtility.getConnection()) {
             String sql = "select * from users where username = ? and email = ? and password = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, username);
