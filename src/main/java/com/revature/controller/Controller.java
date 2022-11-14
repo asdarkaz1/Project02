@@ -1,5 +1,7 @@
 package com.revature.controller;
 
-public interface Controller {
+import io.javalin.Javalin;
 
+public interface Controller {
+    void mapEndPoints(Javalin app);
 }

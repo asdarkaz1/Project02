@@ -9,14 +9,47 @@ public class User {
     private String email;
     private String password;
 
+    private String first_name;
+
+    private String last_name;
+
+    private String interest;
+
     public User(){
     }
 
-    public User(int user_id, String username, String email, String password) {
+    public User(int user_id, String username, String email, String password, String first_name, String last_name, String interest) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.interest = interest;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getInterest() {
+        return interest;
+    }
+
+    public void setInterest(String interest) {
+        this.interest = interest;
     }
 
     public int getUser_id() {
@@ -55,12 +88,12 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return user_id == user.user_id && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
+        return user_id == user.user_id && username.equals(user.username) && email.equals(user.email) && password.equals(user.password) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(interest, user.interest);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, username, email, password);
+        return Objects.hash(user_id, username, email, password, first_name, last_name, interest);
     }
 
     @Override
@@ -70,6 +103,9 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", interest='" + interest + '\'' +
                 '}';
     }
 }
