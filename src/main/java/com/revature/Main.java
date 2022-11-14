@@ -1,5 +1,9 @@
 package com.revature;
 import com.revature.ProfileModel.User;
+import com.revature.controller.CommentController;
+import com.revature.controller.Controller;
+import com.revature.controller.PostController;
+import com.revature.controller.ProfileController;
 import com.revature.util.ConnectionFactory;
 import io.javalin.Javalin;
 import org.postgresql.Driver;
@@ -10,7 +14,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
+import com.revature.controller.Controller;
+//import com.revature.controller.PostController;
+import com.revature.controller.UserAuthenticationController;
+import io.javalin.Javalin;
+
 public class Main {
+    public static void main(String[] args) {
+        Javalin app = Javalin.create().start();
+
+        Controller[] controllers ={new UserAuthenticationController()};
+
+        for(Controller c : controllers){
+            c.mapEndPoints(app);
+        }
+
+        app.start(8080);
+    }
 
     public static void main(String[] args) {
 
@@ -24,79 +44,10 @@ public class Main {
                 }
         ));});
 
-
-
-
-        //READ ENDPOINT.
-        app.post("/profileview", (ctx) -> {
-            System.out.println("Queried");
-            String url = "jdbc:postgresql://34.134.248.69:5432/postgres";
-            String username = "postgres";
-            String password = "password";
-            Driver postgresDriver = new Driver();
-            DriverManager.registerDriver(postgresDriver);
-            Connection connection = DriverManager.getConnection(url, username, password);
-                User u = ctx.bodyAsClass(User.class);
-                PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM users WHERE password = ?");
-                pstmt.setString(1, u.getPassWord());
-                ResultSet rs = pstmt.executeQuery();
-               if(rs.next()) {
-                    String firstName = rs.getString("firstname");
-                    String lastName = rs.getString("lastname");
-                    String userName = rs.getString("username");
-                    String passWord = rs.getString("password");
-                    String email = rs.getString("email");
-                    String interest = rs.getString("interest");
-                    ctx.json(new User(firstName, lastName, userName, passWord, email, interest));
-                    ctx.status(200);
-                }else {
-                   ctx.status(400);
-                   ctx.result("Sorry, not found in our database.");
-               }
-
-        });
-
-
-        //UPDATE ENDPOINT.
-        app.post("/profileupdate",(ctx) -> {
-        System.out.println("Updated");
-            String url = "jdbc:postgresql://34.134.248.69:5432/postgres";
-            String username = "postgres";
-            String password = "password";
-            Driver postgresDriver = new Driver();
-            DriverManager.registerDriver(postgresDriver);
-            Connection connection = DriverManager.getConnection(url, username, password);
-            User u = ctx.bodyAsClass(User.class);
-           PreparedStatement pstmt = connection.prepareStatement(
-                   "Update users set username = ? , email = ? ,interest = ? ,firstname= ? , lastname= ? where password = ?;");
-           pstmt.setString(1,u.getUsername());
-           pstmt.setString(2, u.getEmail());
-           pstmt.setString(3, u.getInterest());
-           pstmt.setString(4, u.getFirstname());
-           pstmt.setString(5, u.getLastname());
-           pstmt.setString(6, u.getPassWord());
-
-           int numberOfRecordsUpdated = pstmt.executeUpdate();
-            ctx.result(numberOfRecordsUpdated + " record(s) updated");
-
-        });
-
-//DELETE ENDPOINT
-        app.post("/profiledelete", (ctx) -> {
-            System.out.println("Deleted");
-            String url = "jdbc:postgresql://34.134.248.69:5432/postgres";
-            String username = "postgres";
-            String password = "password";
-            Driver postgresDriver = new Driver();
-            DriverManager.registerDriver(postgresDriver);
-            Connection connection = DriverManager.getConnection(url, username, password);
-            User u = ctx.bodyAsClass(User.class);
-            PreparedStatement pstmt = connection.prepareStatement("DELETE from users where password= ?;");
-                pstmt.setString(1,u.getPassWord());
-                int recordsUpdated = pstmt.executeUpdate();
-                ctx.result(recordsUpdated + " record(s) deleted.");
-
-        });
+        Controller[] controllers = {new ProfileController(), new PostController()};
+        for(Controller c : controllers){
+            c.mapEndPoints(app);
+        }
         app.start(8080);
 
 

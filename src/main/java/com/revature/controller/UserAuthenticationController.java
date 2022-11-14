@@ -1,18 +1,18 @@
 package com.revature.controller;
 
-import com.revature.dto.LoginCredentials;
-import com.revature.dto.Message;
+import com.revature.dto.UserLoginCredentials;
+import com.revature.dto.UserMessage;
 import com.revature.model.User;
 import com.revature.service.UserService;
 import io.javalin.Javalin;
 import jakarta.servlet.http.HttpSession;
 
-public class AuthenticationController {
+public class UserAuthenticationController implements Controller{
 
     private UserService userService = new UserService();
-    public void mapEndpoints(Javalin app) {
+    public void mapEndPoints(Javalin app) {
         app.post("/login", (ctx) -> {
-            LoginCredentials credentials = ctx.bodyAsClass(LoginCredentials.class);
+            UserLoginCredentials credentials = ctx.bodyAsClass(UserLoginCredentials.class);
 
             if (credentials.getUsername() == null || credentials.getEmail() == null || credentials.getPassword() == null) {
                 ctx.result("username and/or email and/or password was not provided");
@@ -27,7 +27,7 @@ public class AuthenticationController {
 
                 if(user == null) {
                     ctx.status(400);
-                    ctx.json(new Message("Invalid login"));
+                    ctx.json(new UserMessage("Invalid login"));
                 } else {
                     ctx.json(user); //Send User object in response body in JSON
                 }
@@ -40,7 +40,7 @@ public class AuthenticationController {
             User loggedInUser = (User) httpSession.getAttribute("user_info");
 
             if (loggedInUser == null){
-                ctx.json(new Message("User is not logged in."));
+                ctx.json(new UserMessage("User is not logged in."));
             } else {
                 ctx.json(loggedInUser);
             }

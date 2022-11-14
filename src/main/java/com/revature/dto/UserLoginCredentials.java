@@ -2,13 +2,13 @@ package com.revature.dto;
 
 import java.util.Objects;
 
-public class LoginCredentials {
+public class UserLoginCredentials {
 
     private String username;
     private String email;
     private String password;
 
-    public LoginCredentials() {
+    public UserLoginCredentials() {
     }
 
     public String getUsername() {
@@ -38,7 +38,7 @@ public class LoginCredentials {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof LoginCredentials that)) return false;
+        if (!(o instanceof UserLoginCredentials that)) return false;
         return Objects.equals(username, that.username) && Objects.equals(email, that.email) && Objects.equals(password, that.password);
     }
 

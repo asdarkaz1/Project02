@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+//package com.revature.controller;
+//
+//public class PostController implements Controller {
+//
+//}
+=======
 package com.revature.controller;
 
 import com.revature.model.Post;
@@ -32,3 +39,4 @@ public class PostController implements Controller {
 
         }
 }
+>>>>>>> main
